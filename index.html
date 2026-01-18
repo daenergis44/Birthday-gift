@@ -1,71 +1,245 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<title>Press Start 🎂</title>
-<style>
-  body {
-    margin: 0;
-    font-family: "Courier New", monospace;
-    background: black;
-    color: #00ffcc;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .screen { display: none; }
-  .active { display: block; }
-  button {
-    margin-top: 2rem;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    background: #00ffcc;
-    border: none;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Für Rober</title>
+
+  <!-- Handwritten font for signature -->
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#ffc6e0;
+      --bg2:#ffe6f2;
+      --card:#ffffffd8;
+      --text:#2a1e24;
+      --muted:#6b5560;
+      --accent:#c2185b;
+      --accent2:#a1124a;
+      --shadow: 0 20px 60px rgba(120,20,70,.22);
+      --radius: 28px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(900px 500px at 15% 10%, rgba(194,24,91,.18), transparent 55%),
+        radial-gradient(900px 500px at 85% 15%, rgba(255,255,255,.6), transparent 60%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      color:var(--text);
+    }
+
+    .card{
+      width:min(760px, 100%);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(22px, 4vw, 36px);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .screen{display:none}
+    .screen.active{display:block; animation: fade .35s ease}
+    @keyframes fade{
+      from{opacity:0; transform:translateY(8px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    h1{
+      font-size:clamp(30px, 4.8vw, 46px);
+      margin:10px 0 12px;
+      letter-spacing:-.02em;
+    }
+
+    p{
+      font-size:clamp(16px, 2.6vw, 18px);
+      line-height:1.7;
+      color:var(--muted);
+      margin:12px 0;
+    }
+
+    .cta{
+      margin-top:22px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      border:none;
+      border-radius:18px;
+      padding:14px 20px;
+      font-weight:700;
+      font-size:15px;
+      cursor:pointer;
+      transition:.15s ease;
+    }
+
+    .primary{
+      background:linear-gradient(180deg, var(--accent), var(--accent2));
+      color:#fff;
+      box-shadow:0 14px 30px rgba(194,24,91,.28);
+    }
+    .primary:hover{transform:translateY(-1px)}
+    .ghost{
+      background:rgba(255,255,255,.7);
+      border:1px solid rgba(194,24,91,.2);
+      color:var(--accent2);
+    }
+
+    /* Gift animation */
+    .gift{
+      width:150px;
+      height:120px;
+      margin:26px auto 10px;
+      position:relative;
+      opacity:0;
+      transform:scale(.7);
+    }
+    .gift.show{
+      animation:pop .6s cubic-bezier(.2,1.2,.2,1) forwards;
+    }
+    @keyframes pop{
+      to{opacity:1; transform:scale(1)}
+    }
+    .box{
+      position:absolute;
+      bottom:0;
+      width:100%;
+      height:80px;
+      background:#fff;
+      border-radius:20px;
+      border:1px solid rgba(194,24,91,.2);
+    }
+    .ribbon{
+      position:absolute;
+      left:50%;
+      top:0;
+      bottom:0;
+      width:18px;
+      transform:translateX(-50%);
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    }
+
+    .amount{
+      font-size:clamp(46px, 7vw, 64px);
+      font-weight:900;
+      color:var(--accent2);
+      margin:10px 0;
+    }
+
+    .signature{
+      margin-top:26px;
+      font-family:'Allura', cursive;
+      font-size:40px;
+      color:var(--accent2);
+    }
+  </style>
 </head>
 <body>
 
-<div id="screen1" class="screen active">
-  <h1>▶ PRESS START</h1>
-  <button onclick="next(2)">START</button>
-</div>
+<div class="card">
 
-<div id="screen2" class="screen">
-  <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
-  <p>Heute ist dein Tag.</p>
-  <button onclick="next(3)">Weiter</button>
-</div>
+  <!-- Screen 1 -->
+  <section id="s1" class="screen active">
+    <h1>Lieber Rober,</h1>
+    <p>drücke Start – und lass dich überraschen.</p>
+    <div class="cta">
+      <button class="primary" onclick="go(2)">Start</button>
+    </div>
+  </section>
 
-<div id="screen3" class="screen">
-  <h1>🖌️ Geschenk freigeschaltet</h1>
-  <p><strong>Keramik bemalen</strong><br>⏰ 14:00 Uhr</p>
-  <button onclick="next(4)">Weiter</button>
-</div>
+  <!-- Screen 2 -->
+  <section id="s2" class="screen">
+    <h1>Herzlichen Glückwunsch<br>zum Geburtstag! 🎂</h1>
+    <p>
+      Heute bist du <strong>28 Jahre alt</strong> geworden
+      und genau deshalb feiern wir heute <strong>dich</strong>.
+    </p>
+    <div class="cta">
+      <button class="primary" onclick="go(3)">Weiter</button>
+    </div>
+  </section>
 
-<div id="screen4" class="screen">
-  <h1>🎁 Gutschein</h1>
-  <p style="font-size:2rem;"><strong>200 €</strong></p>
-  <p>für einen Garmin Board Computer</p>
-  <button onclick="next(5)">Finale</button>
-</div>
+  <!-- Screen 3 -->
+  <section id="s3" class="screen">
+    <h1>Geschenke freigeschaltet ✨</h1>
+    <div id="gift" class="gift">
+      <div class="box"></div>
+      <div class="ribbon"></div>
+    </div>
+    <div class="cta">
+      <button class="primary" onclick="go(4)">Weiter</button>
+    </div>
+  </section>
 
-<div id="screen5" class="screen">
-  <h1>❤️ Gespeichert</h1>
-  <p>Dieser Moment bleibt.</p>
-  <p>Für immer.</p>
+  <!-- Screen 4 -->
+  <section id="s4" class="screen">
+    <h1>Keramik bemalen um 14 Uhr 🖌️</h1>
+    <p>
+      Du wolltest ja so gern mal Keramik bemalen –
+      und diesen Wunsch erfülle ich dir heute.
+      <br><br>
+      Du darfst dir eine Keramikform aussuchen
+      und sie ganz in Ruhe bemalen.
+    </p>
+    <div class="cta">
+      <button class="primary" onclick="go(5)">Weiter</button>
+    </div>
+  </section>
+
+  <!-- Screen 5 -->
+  <section id="s5" class="screen">
+    <h1>Gutschein</h1>
+    <div class="amount">200 €</div>
+    <p>
+      für einen Fahrrad-Boardcomputer deiner Wahl.
+      <br>
+      Dieser Gutschein ist <strong>ab sofort gültig</strong>.
+    </p>
+    <div class="cta">
+      <button class="primary" onclick="go(6)">Weiter</button>
+    </div>
+  </section>
+
+  <!-- Screen 6 -->
+  <section id="s6" class="screen">
+    <h1>Zum Schluss 💗</h1>
+    <p>
+      Ich hoffe, dass dir deine Geschenke gefallen
+      und dass du ganz viel Spaß damit hast.
+      <br><br>
+      Ich liebe dich ganz doll.
+    </p>
+    <div class="signature">Dein Pookie</div>
+  </section>
+
 </div>
 
 <script>
-function next(n) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen' + n).classList.add('active');
-}
+  function go(n){
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('s'+n).classList.add('active');
+
+    if(n === 3){
+      const g = document.getElementById('gift');
+      g.classList.remove('show');
+      void g.offsetWidth;
+      g.classList.add('show');
+    }
+  }
 </script>
 
 </body>
 </html>
-# Birthday-gift
