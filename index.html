@@ -5,20 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Für Rober</title>
 
-  <!-- Handwritten font for signature -->
+  <!-- Handschrift für Signatur -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#ffc6e0;
-      --bg2:#ffe6f2;
-      --card:#ffffffd8;
-      --text:#2a1e24;
-      --muted:#6b5560;
-      --accent:#c2185b;
-      --accent2:#a1124a;
-      --shadow: 0 20px 60px rgba(120,20,70,.22);
-      --radius: 28px;
+      --bg1:#f6b3cf;
+      --bg2:#fde1ec;
+      --text:#2b1f25;
+      --muted:#5e4a53;
+      --accent:#a1124a;
     }
 
     *{box-sizing:border-box}
@@ -27,176 +23,136 @@
       margin:0;
       min-height:100vh;
       display:flex;
-      justify-content:center;
       align-items:center;
+      justify-content:center;
       padding:24px;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(900px 500px at 15% 10%, rgba(194,24,91,.18), transparent 55%),
-        radial-gradient(900px 500px at 85% 15%, rgba(255,255,255,.6), transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
       color:var(--text);
+      text-align:center;
     }
 
-    .card{
-      width:min(760px, 100%);
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:clamp(22px, 4vw, 36px);
-      position:relative;
-      overflow:hidden;
-      backdrop-filter: blur(10px);
+    .screen{
+      display:none;
+      max-width:800px;
+      width:100%;
+      animation: fade .35s ease;
     }
+    .screen.active{ display:block; }
 
-    .screen{display:none}
-    .screen.active{display:block; animation: fade .35s ease}
     @keyframes fade{
-      from{opacity:0; transform:translateY(8px)}
+      from{opacity:0; transform:translateY(6px)}
       to{opacity:1; transform:translateY(0)}
     }
 
     h1{
-      font-size:clamp(30px, 4.8vw, 46px);
-      margin:10px 0 12px;
+      font-size:clamp(30px, 5vw, 46px);
+      margin:0 0 18px;
+      font-weight:600;
       letter-spacing:-.02em;
     }
 
     p{
       font-size:clamp(16px, 2.6vw, 18px);
-      line-height:1.7;
+      line-height:1.75;
       color:var(--muted);
-      margin:12px 0;
-    }
-
-    .cta{
-      margin-top:22px;
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
+      margin:0 0 28px;
     }
 
     button{
       border:none;
-      border-radius:18px;
-      padding:14px 20px;
-      font-weight:700;
-      font-size:15px;
+      background:none;
+      font-size:16px;
+      font-weight:600;
+      color:var(--accent);
       cursor:pointer;
+      padding:10px 18px;
+      border-radius:999px;
       transition:.15s ease;
     }
 
-    .primary{
-      background:linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#fff;
-      box-shadow:0 14px 30px rgba(194,24,91,.28);
-    }
-    .primary:hover{transform:translateY(-1px)}
-    .ghost{
-      background:rgba(255,255,255,.7);
-      border:1px solid rgba(194,24,91,.2);
-      color:var(--accent2);
-    }
-
-    /* Gift animation */
-    .gift{
-      width:150px;
-      height:120px;
-      margin:26px auto 10px;
-      position:relative;
-      opacity:0;
-      transform:scale(.7);
-    }
-    .gift.show{
-      animation:pop .6s cubic-bezier(.2,1.2,.2,1) forwards;
-    }
-    @keyframes pop{
-      to{opacity:1; transform:scale(1)}
-    }
-    .box{
-      position:absolute;
-      bottom:0;
-      width:100%;
-      height:80px;
-      background:#fff;
-      border-radius:20px;
-      border:1px solid rgba(194,24,91,.2);
-    }
-    .ribbon{
-      position:absolute;
-      left:50%;
-      top:0;
-      bottom:0;
-      width:18px;
-      transform:translateX(-50%);
-      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    button:hover{
+      background:rgba(161,18,74,.08);
     }
 
     .amount{
-      font-size:clamp(46px, 7vw, 64px);
-      font-weight:900;
-      color:var(--accent2);
-      margin:10px 0;
+      font-size:clamp(44px, 8vw, 64px);
+      font-weight:800;
+      color:var(--accent);
+      margin-bottom:12px;
     }
 
     .signature{
-      margin-top:26px;
+      margin-top:30px;
       font-family:'Allura', cursive;
-      font-size:40px;
-      color:var(--accent2);
+      font-size:42px;
+      color:var(--accent);
+    }
+
+    /* Images */
+    .images{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+      margin:24px 0 30px;
+    }
+
+    .images img{
+      width:100%;
+      border-radius:18px;
+      object-fit:cover;
+    }
+
+    @media (max-width:600px){
+      .images{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="card">
-
   <!-- Screen 1 -->
   <section id="s1" class="screen active">
-    <h1>Lieber Rober,</h1>
-    <p>drücke Start – und lass dich überraschen.</p>
-    <div class="cta">
-      <button class="primary" onclick="go(2)">Start</button>
-    </div>
+    <h1>Pookie,</h1>
+    <p>lass dich überraschen.</p>
+    <button onclick="go(2)">Start</button>
   </section>
 
   <!-- Screen 2 -->
   <section id="s2" class="screen">
-    <h1>Herzlichen Glückwunsch<br>zum Geburtstag! 🎂</h1>
+    <h1>Herzlichen Glückwunsch zum Geburtstag</h1>
     <p>
-      Heute bist du <strong>28 Jahre alt</strong> geworden
-      und genau deshalb feiern wir heute <strong>dich</strong>.
+      Heute bist du 28 Jahre alt geworden<br>
+      und dafür feiern wir dich.
     </p>
-    <div class="cta">
-      <button class="primary" onclick="go(3)">Weiter</button>
-    </div>
+    <button onclick="go(3)">Weiter</button>
   </section>
 
   <!-- Screen 3 -->
   <section id="s3" class="screen">
-    <h1>Geschenke freigeschaltet ✨</h1>
-    <div id="gift" class="gift">
-      <div class="box"></div>
-      <div class="ribbon"></div>
+    <h1>Geschenke freigeschaltet</h1>
+
+    <div class="images">
+      <img src="bild1.jpg" alt="Erinnerung 1">
+      <img src="bild2.jpg" alt="Erinnerung 2">
+      <img src="bild3.jpg" alt="Erinnerung 3">
+      <img src="bild4.jpg" alt="Erinnerung 4">
     </div>
-    <div class="cta">
-      <button class="primary" onclick="go(4)">Weiter</button>
-    </div>
+
+    <button onclick="go(4)">Weiter</button>
   </section>
 
   <!-- Screen 4 -->
   <section id="s4" class="screen">
-    <h1>Keramik bemalen um 14 Uhr 🖌️</h1>
+    <h1>Keramik bemalen um 14 Uhr</h1>
     <p>
-      Du wolltest ja so gern mal Keramik bemalen –
-      und diesen Wunsch erfülle ich dir heute.
-      <br><br>
-      Du darfst dir eine Keramikform aussuchen
+      Du wolltest so gern einmal Keramik bemalen<br>
+      und diesen Wunsch erfülle ich dir heute.<br><br>
+      Du darfst dir eine Keramikform aussuchen<br>
       und sie ganz in Ruhe bemalen.
     </p>
-    <div class="cta">
-      <button class="primary" onclick="go(5)">Weiter</button>
-    </div>
+    <button onclick="go(5)">Weiter</button>
   </section>
 
   <!-- Screen 5 -->
@@ -204,40 +160,25 @@
     <h1>Gutschein</h1>
     <div class="amount">200 €</div>
     <p>
-      für einen Fahrrad-Boardcomputer deiner Wahl.
-      <br>
-      Dieser Gutschein ist <strong>ab sofort gültig</strong>.
+      für einen Fahrrad-Boardcomputer deiner Wahl.<br>
+      Dieser Gutschein ist ab sofort gültig.
     </p>
-    <div class="cta">
-      <button class="primary" onclick="go(6)">Weiter</button>
-    </div>
+    <button onclick="go(6)">Weiter</button>
   </section>
 
   <!-- Screen 6 -->
   <section id="s6" class="screen">
-    <h1>Zum Schluss 💗</h1>
+    <h1>Zum Schluss</h1>
     <p>
-      Ich hoffe, dass dir deine Geschenke gefallen
-      und dass du ganz viel Spaß damit hast.
-      <br><br>
-      Ich liebe dich ganz doll.
+      Ich hoffe, dass du ganz viel Spaß hast, Cookie
     </p>
     <div class="signature">Dein Pookie</div>
   </section>
-
-</div>
 
 <script>
   function go(n){
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('s'+n).classList.add('active');
-
-    if(n === 3){
-      const g = document.getElementById('gift');
-      g.classList.remove('show');
-      void g.offsetWidth;
-      g.classList.add('show');
-    }
   }
 </script>
 
