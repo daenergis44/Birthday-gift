@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Für Rober</title>
 
-  <!-- Handschrift für Signatur -->
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
 
   <style>
@@ -75,6 +74,14 @@
       background:rgba(161,18,74,.08);
     }
 
+    .image{
+      width:100%;
+      max-height:360px;
+      object-fit:cover;
+      border-radius:18px;
+      margin:24px 0 30px;
+    }
+
     .amount{
       font-size:clamp(44px, 8vw, 64px);
       font-weight:800;
@@ -88,33 +95,13 @@
       font-size:42px;
       color:var(--accent);
     }
-
-    /* Images */
-    .images{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:14px;
-      margin:24px 0 30px;
-    }
-
-    .images img{
-      width:100%;
-      border-radius:18px;
-      object-fit:cover;
-    }
-
-    @media (max-width:600px){
-      .images{
-        grid-template-columns:1fr;
-      }
-    }
   </style>
 </head>
 <body>
 
   <!-- Screen 1 -->
   <section id="s1" class="screen active">
-    <h1>Pookie,</h1>
+    <h1>Hi Pookie,</h1>
     <p>lass dich überraschen.</p>
     <button onclick="go(2)">Start</button>
   </section>
@@ -129,48 +116,50 @@
     <button onclick="go(3)">Weiter</button>
   </section>
 
-  <!-- Screen 3 -->
+  <!-- Screen 3 – Bild 1 -->
   <section id="s3" class="screen">
     <h1>Geschenke freigeschaltet</h1>
-
-    <div class="images">
-      <img src="bild1.jpg" alt="Erinnerung 1">
-      <img src="bild2.jpg" alt="Erinnerung 2">
-      <img src="bild3.jpg" alt="Erinnerung 3">
-      <img src="bild4.jpg" alt="Erinnerung 4">
-    </div>
-
+    <img src="bild1.jpg" alt="Erinnerung 1" class="image">
     <button onclick="go(4)">Weiter</button>
   </section>
 
-  <!-- Screen 4 -->
+  <!-- Screen 4 – Bild 2 -->
   <section id="s4" class="screen">
-    <h1>Keramik bemalen um 14 Uhr</h1>
-    <p>
-      Du wolltest so gern einmal Keramik bemalen<br>
-      und diesen Wunsch erfülle ich dir heute.<br><br>
-      Du darfst dir eine Keramikform aussuchen<br>
-      und sie ganz in Ruhe bemalen.
-    </p>
+    <h1>Ein besonderer Tag</h1>
+    <img src="bild2.jpg" alt="Erinnerung 2" class="image">
     <button onclick="go(5)">Weiter</button>
   </section>
 
-  <!-- Screen 5 -->
+  <!-- Screen 5 – Keramik + Bild 3 -->
   <section id="s5" class="screen">
+    <h1>Keramik bemalen um 14 Uhr</h1>
+    <img src="bild3.jpg" alt="Keramik bemalen" class="image">
+    <p>
+      Weil du gerne Keramik bemalen wollltest,<br>
+      erfülle ich dir heute diesen Wunsch.<br><br>
+      Du darfst dir eine Keramikform aussuchen<br>
+      und sie bemalen.
+    </p>
+    <button onclick="go(6)">Weiter</button>
+  </section>
+
+  <!-- Screen 6 – Gutschein + Bild 4 -->
+  <section id="s6" class="screen">
     <h1>Gutschein</h1>
+    <img src="bild4.jpg" alt="Boardcomputer" class="image">
     <div class="amount">200 €</div>
     <p>
       für einen Fahrrad-Boardcomputer deiner Wahl.<br>
       Dieser Gutschein ist ab sofort gültig.
     </p>
-    <button onclick="go(6)">Weiter</button>
+    <button onclick="go(7)">Weiter</button>
   </section>
 
-  <!-- Screen 6 -->
-  <section id="s6" class="screen">
+  <!-- Screen 7 -->
+  <section id="s7" class="screen">
     <h1>Zum Schluss</h1>
     <p>
-      Ich hoffe, dass du ganz viel Spaß hast, Cookie
+      Ich hoffe, dass du ganz viel Spaß heute hast und spannende Fahrradtouren machen kannst. 
     </p>
     <div class="signature">Dein Pookie</div>
   </section>
